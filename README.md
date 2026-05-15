@@ -6,7 +6,7 @@ A Lang-chain project using Cassandra DB supported by Google Gemini AI model and 
 ```mermaid
 graph TD
     subgraph Ingestion_Flow
-        A[PDF Document] --> B[Reading the Document(Text Extraction & Splitting)]
+        A[PDF Document] --> B[Reading the Document - Text Extraction & Splitting]
         B --> C[Text Chunks]
         C --> D[Google Gemini Embeddings]
         D --> E[Vector Database (Cassandra/Astra DB)]
