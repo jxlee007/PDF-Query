@@ -15,8 +15,8 @@ graph TD
     subgraph Query_Flow
         F[User Query] --> G[Google Gemini Embeddings]
         G --> H[Similarity Search]
-        E --> H
-        H --> I[Relevant Context]
+        H --> I[Text embeddings]
+        E --> I
         I --> J[Google Gemini LLM]
         F --> J
         J --> K[Final Answer]
