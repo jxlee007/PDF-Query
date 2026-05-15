@@ -14,8 +14,8 @@ graph TD
 
     subgraph Query_Flow
         F[Human] --> G["Text + Query"]
-        G -- "Similarity Search (Text + Embeddings)" --> E
-        E -- "DataStax Vector Search" --> H["Text embeddings (Relevant context)"]
+        G -- "Similarity Search" --> E
+        E -- "DataStax Vector Search" --> H["Text embeddings \n(Relevant context)"]
         H --> I[Google Gemini LLM]
         G --> I
         I --> J[Final Answer]
