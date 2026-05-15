@@ -24,8 +24,32 @@ graph TD
 
 ```
 
+## Setup
+
+1. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Environment Variables**:
+   Create a `.env` file based on `.env.example` and add your credentials:
+   - `ASTRA_DB_APPLICATION_TOKEN`
+   - `ASTRA_DB_ID`
+   - `GOOGLE_API_KEY`
+
+## How to Run
+
+Launch the Streamlit application:
+```bash
+streamlit run app.py
+```
+
+## Features
+- **Dynamic PDF Upload**: Upload any PDF to query its content.
+- **Astra DB Integration**: Powered by DataStax for high-performance vector search.
+- **Google Gemini AI**: Uses state-of-the-art models for embeddings and text generation.
+
 # Resources
-- Datastack
-
-
-
+- [DataStax Astra DB](https://astra.datastax.com/)
+- [Google AI Studio](https://aistudio.google.com/)
+- [LangChain Documentation](https://python.langchain.com/)

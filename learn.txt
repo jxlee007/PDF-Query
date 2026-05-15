@@ -1,0 +1,13 @@
+cmds
+py -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt 
+./.venv/bin/streamlit run app.py
+
+a jupter notebook need - pip install ipykernel 
+not needed in requirements.txt as it goes to deployment 
+
+
+
+
+apache cassandra is opensource distributed NoSQL DB

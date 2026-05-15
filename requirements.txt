@@ -1,0 +1,16 @@
+# Core AI and Framework
+langchain
+langchain-community
+langchain-google-genai
+google-generativeai
+langchain-classic
+
+# Database and Document Processing
+cassio
+datasets
+PyPDF2
+typing-extensions
+
+# Environment and UI
+python-dotenv
+streamlit
