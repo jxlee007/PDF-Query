@@ -6,21 +6,21 @@ A Lang-chain project using Cassandra DB supported by Google Gemini AI model and 
 ```mermaid
 graph TD
     subgraph Ingestion_Flow
-        A[PDF Document] --> B[Text Extraction & Splitting]
+        A[PDF Document] --> B[Reading the Document(Text Extraction & Splitting)]
         B --> C[Text Chunks]
         C --> D[Google Gemini Embeddings]
-        D --> E[(Cassandra DB - Vector Store)]
+        D --> E[Vector Database (Cassandra/Astra DB)]
     end
 
     subgraph Query_Flow
-        F[User Query] --> G[Google Gemini Embeddings]
-        G --> H[Similarity Search]
-        H --> I[Text embeddings]
-        E --> I
-        I --> J[Google Gemini LLM]
-        F --> J
-        J --> K[Final Answer]
+        F[Human] --> G[Text + Query]
+        G -- "Similarity Search (Text + Embeddings)" --> E[Vector Database (Cassandra/Astra DB)]
+        E -- "DataStax Vector Search" --> H[Text embeddings(Relevant context)]
+        H --> I[Google Gemini LLM]
+        G --> I
+        I --> J[Final Answer]
     end
+
 ```
 
 # Resources
