@@ -46,11 +46,31 @@ def initialize_app():
     google_api_key = os.getenv("GOOGLE_API_KEY")
 
     if not all([astra_token, astra_id, google_api_key]):
-        st.error("Missing configuration. Please ensure .env file is set up correctly.")
+        st.error("Missing configuration. Please ensure environment variables ASTRA_DB_APPLICATION_TOKEN, ASTRA_DB_ID, and GOOGLE_API_KEY are configured in your Streamlit Secrets or .env file.")
         st.stop()
 
-    # Initialize CassIO
-    cassio.init(token=astra_token, database_id=astra_id)
+    # Initialize CassIO with error handling
+    try:
+        cassio.init(token=astra_token, database_id=astra_id)
+    except Exception as e:
+        st.error(f"""
+        ### ❌ Connection to Astra DB Failed
+        
+        The app was unable to connect to Astra DB. This is typically caused by one of the following:
+        
+        1. **Hibernated Database (Most Common)**: Astra DB free-tier databases automatically hibernate after 48 hours of inactivity.
+           * **Solution**: Log in to your [DataStax Astra Console](https://astra.datastax.com/), check your database status, and click **Resume** if it is hibernated.
+           
+        2. **Invalid or Expired Token**: Ensure your `ASTRA_DB_APPLICATION_TOKEN` (starts with `AstraCS:...`) is correct, has not expired, and has "Database Administrator" or "Read/Write" permissions.
+        
+        3. **Incorrect Database ID**: Verify that the `ASTRA_DB_ID` matches the UUID of your active database exactly.
+        
+        4. **Network Firewall / Restrictions**: If this is deployed on a restricted environment, connections on Cassandra's non-standard ports (29080 / 29042) might be blocked.
+        
+        **Detailed Error:**
+        `{e}`
+        """)
+        st.stop()
     
     # Initialize LLM and Embeddings
     llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=google_api_key, temperature=0.3)
